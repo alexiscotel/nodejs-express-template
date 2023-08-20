@@ -24,16 +24,37 @@ NodeJS template for a REST API with Express. Serve routes **get, post, put, patc
 
 ## Usage 
 
-*Instructions and examples for use:*
+Use `/` to get root Request response, 
 
-* Use `/` to get root Request response, 
-* use `/file` to get rootFile srving from **PUBLIC_DIR** *.env* value, 
-* You can use also `/get, /post, /put, /patch, /delete`, with URL and body params
+use `/file` to get rootFile srving from **PUBLIC_DIR** *.env* value, 
+
+You can use also `/get, /post, /put, /patch, /delete`, with URL and body params
 
 Complete theses files with your logic :
-* `router/index.js` for routing
-* `controllers/ctrl.js` for main logic
-* `middlewares/mid.js` for intercepting request
+	* `router/index.js` for routing
+	* `controllers/ctrl.js` for main logic
+	* `middlewares/mid.js` for intercepting request
+
+You can deactive serving root route in `app/router/index.js`
+
+```js
+router.get('/', mid.middleware, ctrl.serveRootFile);
+```
+
+to use directly in `app/index.js` with theses recommanded lines :
+
+```js
+// ! Choose one of above to serve static files
+
+// serve PUBLIC_DIR/* files
+app.use(express.static(buildPath));
+
+// serve route
+app.get('/', (req, res, next) => {
+	res.send('Hello nodejs-template !');
+});
+
+```
 
 ## Questions?
 

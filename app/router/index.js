@@ -12,9 +12,10 @@ const mid = require('../middlewares/mid');
 // ? branch your routes here
 // * format : router.get('/path', mid.middleware, ctrl.get);
 
-// * example
+// * examples (remove this when you're done)
 // router.get('/', mid.middleware, ctrl.rootRequest);
 router.get('/', mid.middleware, ctrl.serveRootFile);
+
 router.get('/get/:param', mid.middleware, ctrl.getRequest);
 router.post('/post', mid.middleware, ctrl.postRequest);
 router.put('/put/:param', mid.middleware, ctrl.putRequest);

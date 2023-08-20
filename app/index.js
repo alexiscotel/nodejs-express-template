@@ -20,14 +20,6 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // # < EXPRESS CONFIG
 
-// ? Choose one of above to serve static files
-// * serve PUBLIC_DIR/* files
-// app.use(express.static(buildPath));
-// * serve route
-// app.get('/', (req, res, next) => {
-// 	res.send('Hello nodejs-template !');
-// });
-
 const router = require('./router');
 app.use('/', router);
 
