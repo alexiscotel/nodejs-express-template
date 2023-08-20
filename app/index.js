@@ -20,8 +20,26 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // # < EXPRESS CONFIG
 
+// # > ROUTER
 const router = require('./router');
 app.use('/', router);
+// # < ROUTER
+
+// # > AUTH 
+const auth = require('nodejs-auth-sqlite3')
+app.use('/auth', auth.authRoutes);
+app.use('/admin', auth.checkAuth, (req, res) => {
+	res.status(200).json('Hello admin!');
+});
+app.get('/profile', auth.checkAuth, (req, res) => {
+	jwt.verify(req.headers.authorization.split(' ')[1], process.env.JWT_KEY, (err, decoded) => {
+		if (err) {
+			return res.status(401).json('token_not_valid');
+		} else {
+			res.status(200).json(['Hello my profile!', decoded]);
+		}
+	});
+});
 
 
 // * serve app
